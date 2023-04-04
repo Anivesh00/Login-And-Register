@@ -1,0 +1,34 @@
+{
+  "user": [
+    {
+      "id": "Anivesh",
+      "name": "Anivesh Singh",
+      "password": "12345",
+      "email": "a@gmail.com",
+      "phone": "7007599630",
+      "country": "india",
+      "address": "578 sector 10/A gurugram, Haryana",
+      "gender": "male"
+    },
+    {
+      "id": "Devendra",
+      "name": "Devendra Singh",
+      "password": "12345",
+      "email": "d@gmail.com",
+      "phone": "7007835769",
+      "country": "india",
+      "address": "578 sector 10/A gurugram, Haryana",
+      "gender": "male"
+    },
+    {
+      "id": "Deeksha",
+      "name": "Deeksha Singh",
+      "password": "12345",
+      "email": "d1@gmail.com",
+      "phone": "1234567890",
+      "country": "india",
+      "address": "578 sector 10/A gurugram, Haryana",
+      "gender": "female"
+    }
+  ]
+}

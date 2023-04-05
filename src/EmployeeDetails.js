@@ -2,37 +2,39 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-const Register = () => {
+const EmployeeDetails = () => {
   const [id, idchange] = useState("");
   const [name, namechange] = useState("");
-  const [password, passwordchange] = useState("");
   const [email, emailchange] = useState("");
+  const [designation, designantionchange] = useState("Associate Engineer");
   const [phone, phonechange] = useState("");
   const [country, countrychange] = useState("india");
   const [address, addresschange] = useState("");
-  const [gender, genderchange] = useState("female");
+  const [gender, genderchange] = useState("male");
 
   const navigate = useNavigate();
 
   const IsValidate = () => {
     let isproceed = true;
     let errormessage = "Please enter the value in ";
-    if (id === null || id === "") {
+    if (id === null || id === '') {
       isproceed = false;
-      errormessage += " Username";
+      errormessage += " Emloyeeid";
     }
+    
     if (name === null || name === "") {
       isproceed = false;
       errormessage += " Fullname";
-    }
-    if (password === null || password === "") {
-      isproceed = false;
-      errormessage += " Password";
     }
     if (email === null || email === "") {
       isproceed = false;
       errormessage += " Email";
     }
+    if (designation === null || designation === "") {
+        isproceed = false;
+        errormessage += " designation";
+      }
+      
 
     if (!isproceed) {
       toast.warning(errormessage);
@@ -42,20 +44,27 @@ const Register = () => {
         isproceed = false;
         toast.warning("Please enter the valid email");
       }
+      if(id.length>3 && id.length <=6){
+      }else {
+        isproceed = false;
+        toast.warning("Employee Id must be greater then 3 and less then 7");
+      }
     }
+
+    
     return isproceed;
   };
 
   const handlesubmit = (e) => {
     e.preventDefault();
-    let regobj = { id, name, password, email, phone, country, address, gender };
+    let regobj = { id, name, email,designation, phone, country, address, gender };
     if (IsValidate()) {
       Promise.all([
-        fetch(`http://localhost:8000/user?email=${email}`, {
+        fetch(`http://localhost:8000/employee?email=${email}`, {
           method: "GET",
           headers: { "content-type": "application/json" },
         }),
-        fetch(`http://localhost:8000/user?id=${id}`, {
+        fetch(`http://localhost:8000/employee?id=${id}`, {
           method: "GET",
           headers: { "content-type": "application/json" },
         })
@@ -70,18 +79,18 @@ const Register = () => {
       .then(([emailData, idData]) => {
         if (emailData.length > 0 || idData.length > 0) {
           // Either email or id already exists, show error
-          toast.error("Email or Username already exists");
+          toast.error("Email or EmployeeId already exists");
         } else {
           // Email and id are available, submit the form
-          fetch("http://localhost:8000/user", {
+          fetch("http://localhost:8000/employee", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(regobj),
           })
           .then((res) => {
             if (res.ok) {
-              toast.success("Registered successfully.");
-              navigate("/login");
+              toast.success("Employee Details Registered successfully.");
+              navigate("/employeedata");
             } else {
               throw new Error("Network response was not ok.");
             }
@@ -107,35 +116,24 @@ const Register = () => {
           {/*  */}
           <div className="card">
             <div className="card-header">
-              <h1>User Registeration</h1>
+              <h1>Employee Details Registeration</h1>
             </div>
             <div className="card-body">
               <div className="row">
                 <div className="col-lg-6">
                   <div className="form-group">
                     <label>
-                      User Name <span className="errmsg">*</span>
+                      Employee Id <span className="errmsg">*</span>
                     </label>
                     <input
                       value={id}
+                      type="number"
                       onChange={(e) => idchange(e.target.value)}
                       className="form-control"
                     ></input>
                   </div>
                 </div>
-                <div className="col-lg-6">
-                  <div className="form-group">
-                    <label>
-                      Password <span className="errmsg">*</span>
-                    </label>
-                    <input
-                      value={password}
-                      onChange={(e) => passwordchange(e.target.value)}
-                      type="password"
-                      className="form-control"
-                    ></input>
-                  </div>
-                </div>
+                
                 <div className="col-lg-6">
                   <div className="form-group">
                     <label>
@@ -158,6 +156,30 @@ const Register = () => {
                       onChange={(e) => emailchange(e.target.value)}
                       className="form-control"
                     ></input>
+                  </div>
+                </div>
+                <div className="col-lg-6">
+                  <div className="form-group">
+                    <label title="Select your Designation">
+                      Designation <span className="errmsg">*</span>
+                    </label>
+                    <select
+                      value={designation}
+                      onChange={(e) => designantionchange(e.target.value)}
+                      className="form-control"
+                      title="Select Your Designation"
+                    >
+                        {/* <option value="">Select your Designation</option> */}
+                      <option value="Associate Engineer">Associate Engineer</option>
+                      <option value="Commando Associate">Commando Associate Engineer</option>
+                      <option value="HR">Human Resources</option>
+                    </select>
+                    {/* <input
+                      value={designation}
+                      onChange={(e) => designantionchange(e.target.value)}
+                    //   type="password"
+                      className="form-control"
+                    ></input> */}
                   </div>
                 </div>
                 <div className="col-lg-6">
@@ -226,7 +248,7 @@ const Register = () => {
             </div>
             <div className="card-footer">
               <button type="submit" className="btn btn-primary">
-                Register
+                Submit
               </button>{" "}
               |
               <Link to={"/login"} className="btn btn-danger">
@@ -240,4 +262,5 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default EmployeeDetails;
+

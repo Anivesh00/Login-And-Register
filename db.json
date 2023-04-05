@@ -29,6 +29,69 @@
       "country": "india",
       "address": "578 sector 10/A gurugram, Haryana",
       "gender": "female"
+    },
+    {
+      "id": "Abhishek",
+      "name": "Abhishek Bajaj",
+      "password": "12345",
+      "email": "ab@gmail.com",
+      "phone": "1234567890",
+      "country": "india",
+      "address": "Premdhar Patti, Pratapgarh, Uttarpradesh",
+      "gender": "male"
+    },
+    {
+      "id": "Dev",
+      "name": "Dev",
+      "password": "12345",
+      "email": "d@gmail.com",
+      "phone": "1234567890",
+      "country": "india",
+      "address": "Ballia",
+      "gender": "male"
+    },
+    {
+      "id": "Devesh",
+      "name": "Devesh",
+      "password": "12345",
+      "email": "d1@gmail.com",
+      "phone": "1234567890",
+      "country": "india",
+      "address": "Ballia",
+      "gender": "male"
+    },
+    {
+      "id": "Anivesh1",
+      "name": "Anivesh Singh",
+      "password": "12345",
+      "email": "as@gmail.com",
+      "phone": "1234567890",
+      "country": "india",
+      "address": "Ballia",
+      "gender": "male"
+    }
+  ],
+  "employee": [
+    {
+      "id": "1112",
+      "name": "Shejal",
+      "email": "s@gmail.com",
+      "designation": "Associate Engineer",
+      "phone": "1234567890",
+      "country": "india",
+      "address": "Allahabad",
+      "gender": "female"
+    }
+  ],
+  "upload": [
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
     }
   ]
 }

@@ -16,6 +16,10 @@ const Home = () => {
     <>
       <div className="header">
         <Link to={"/"}>Home</Link>
+        <Link to={"/imageupload"}> Image Upload</Link>
+        <Link to={"/employeeupload"}> Empolyee Details</Link>
+        <Link to={"/employeedata"}> Empolyee Data</Link>
+        
         <Link style={{ float: "right" }} to={"/login"}>
           Logout
         </Link>

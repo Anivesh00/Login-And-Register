@@ -15,9 +15,7 @@ const Home = () => {
   return (
     <>
       <div className="header">
-        <Link to={"/"}>Home</Link>
         <Link to={"/imageupload"}> Image Upload</Link>
-        <Link to={"/employeeupload"}> Empolyee Details</Link>
         <Link to={"/employeedata"}> Empolyee Data</Link>
         
         <Link style={{ float: "right" }} to={"/login"}>
@@ -25,7 +23,6 @@ const Home = () => {
         </Link>
         
       </div>
-      <h1>Welcome Anivesh Singh</h1>
     </>
   );
 };

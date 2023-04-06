@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
+import Home from "./Home";
 
 const ImageUpload = () => {
   const [file, setFile] = useState(null);
@@ -40,6 +41,8 @@ const ImageUpload = () => {
   };
 
   return (
+    <div>
+      <Home />
     <div className="row">
       <div className="offset-lg-3 col-lg-6" style={{ marginTop: "100px" }}>
         <form onSubmit={handleUpload} className="container">
@@ -78,6 +81,7 @@ const ImageUpload = () => {
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 };

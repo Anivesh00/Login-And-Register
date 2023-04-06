@@ -73,14 +73,35 @@
   ],
   "employee": [
     {
-      "id": "1112",
-      "name": "Shejal",
-      "email": "s@gmail.com",
-      "designation": "Associate Engineer",
-      "phone": "1234567890",
+      "empid": "1113",
+      "name": "Ankit rastogi",
+      "email": "ar@gmail.com",
+      "designation": "HR",
+      "phone": "6878654323",
       "country": "india",
-      "address": "Allahabad",
-      "gender": "female"
+      "address": "Haryana",
+      "gender": "male",
+      "id": "1113"
+    },
+    {
+      "id": "1111",
+      "name": "Anivesh Singh",
+      "email": "a@gmail.com",
+      "designation": "Commando Associate",
+      "phone": "7007599630",
+      "country": "india",
+      "address": "Ballia, Uttar Pradesh",
+      "gender": "male"
+    },
+    {
+      "id": "1114",
+      "name": "Devendra Singh",
+      "email": "d@gmail.com",
+      "designation": "HR",
+      "phone": "7007835769",
+      "country": "india",
+      "address": "Ballia, UttarPradesh",
+      "gender": "male"
     }
   ],
   "upload": [

@@ -1,9 +1,32 @@
+import { useEffect, useState } from "react";
+import {  useParams } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { toast } from "react-toastify";
-import Home from "./Home"
+import Home from "./Home";
 
-const EmployeeDetails = () => {
+const EmployeeEdit = () => {
+  const { empid } = useParams();
+
+  useEffect(() => {
+    fetch("http://localhost:8000/employee/" + empid)
+      .then((res) => {
+        return res.json();
+      })
+      .then((resp) => {
+        idchange(resp.id);
+        namechange(resp.name);
+        emailchange(resp.email);
+        designantionchange(resp.designation);
+        phonechange(resp.phone);
+        countrychange(resp.country);
+        addresschange(resp.address);
+        genderchange(resp.gender);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, [empid]);
+
   const [id, idchange] = useState("");
   const [name, namechange] = useState("");
   const [email, emailchange] = useState("");
@@ -58,57 +81,24 @@ const EmployeeDetails = () => {
 
   const handlesubmit = (e) => {
     e.preventDefault();
+    // const empid = document.querySelector("#empid").value;
     let regobj = { id, name, email,designation, phone, country, address, gender };
     if (IsValidate()) {
-      Promise.all([
-        fetch(`http://localhost:8000/employee?email=${email}`, {
-          method: "GET",
-          headers: { "content-type": "application/json" },
-        }),
-        fetch(`http://localhost:8000/employee?id=${id}`, {
-          method: "GET",
-          headers: { "content-type": "application/json" },
-        })
-      ])
-      .then(([emailRes, idRes]) => {
-        if (emailRes.ok && idRes.ok) {
-          return Promise.all([emailRes.json(), idRes.json()]);
-        } else {
-          throw new Error("Network response was not ok.");
-        }
-      })
-      .then(([emailData, idData]) => {
-        if (emailData.length > 0 || idData.length > 0) {
-          // Either email or id already exists, show error
-          toast.error("Email or EmployeeId already exists");
-        } else {
-          // Email and id are available, submit the form
-          fetch("http://localhost:8000/employee", {
-            method: "POST",
+      fetch("http://localhost:8000/employee/"+empid, {
+            method: "PUT",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(regobj),
           })
           .then((res) => {
-            if (res.ok) {
-              toast.success("Employee Details Registered successfully.");
+            // if (res.ok) {
+              toast.success("Employee Details Updated successfully.");
               navigate("/employeedata");
-            } else {
-              throw new Error("Network response was not ok.");
-            }
           })
           .catch((err) => {
             toast.error("Failed :" + err.message);
           });
         }
-      })
-      .catch((err) => {
-        toast.error("Failed :" + err.message);
-      });
-    }
-  };
-  
-  
-
+}
 
   return (
     <div>
@@ -118,16 +108,17 @@ const EmployeeDetails = () => {
           {/*  */}
           <div className="card">
             <div className="card-header">
-              <h1>Employee Registeration</h1>
+              <h1>Employee Edit page</h1>
             </div>
             <div className="card-body">
               <div className="row">
                 <div className="col-lg-6">
                   <div className="form-group">
-                    <label>
+                    <label title="You can't update this create new Entry after deleting this">
                       Employee Id <span className="errmsg">*</span>
                     </label>
-                    <input
+                    <input 
+                    title="You can't update this create new Entry after deleting this"
                       value={id}
                       type="number"
                       onChange={(e) => idchange(e.target.value)}
@@ -135,7 +126,7 @@ const EmployeeDetails = () => {
                     ></input>
                   </div>
                 </div>
-                
+
                 <div className="col-lg-6">
                   <div className="form-group">
                     <label>
@@ -171,17 +162,15 @@ const EmployeeDetails = () => {
                       className="form-control"
                       title="Select Your Designation"
                     >
-                        {/* <option value="">Select your Designation</option> */}
-                      <option value="Associate Engineer">Associate Engineer</option>
-                      <option value="Commando Associate">Commando Associate Engineer</option>
+                      {/* <option value="">Select your Designation</option> */}
+                      <option value="Associate Engineer">
+                        Associate Engineer
+                      </option>
+                      <option value="Commando Associate">
+                        Commando Associate Engineer
+                      </option>
                       <option value="HR">Human Resources</option>
                     </select>
-                    {/* <input
-                      value={designation}
-                      onChange={(e) => designantionchange(e.target.value)}
-                    //   type="password"
-                      className="form-control"
-                    ></input> */}
                   </div>
                 </div>
                 <div className="col-lg-6">
@@ -250,7 +239,7 @@ const EmployeeDetails = () => {
             </div>
             <div className="card-footer">
               <button type="submit" className="btn btn-success">
-                Submit
+                Update
               </button>{" "}
               |
               <Link to={"/employeedata"} className="btn btn-danger">
@@ -264,5 +253,4 @@ const EmployeeDetails = () => {
   );
 };
 
-export default EmployeeDetails;
-
+export default EmployeeEdit;

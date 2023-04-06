@@ -30,7 +30,7 @@ const Login = () => {
               toast.success("Success");
               sessionStorage.setItem("username", username);
               // sessionStorage.setItem('userrole',resp.role);
-              usenavigate("/");
+              usenavigate("/employeedata");
             } else {
               toast.error("Please Enter valid credentials");
             }
